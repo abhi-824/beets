@@ -122,7 +122,7 @@ export default function BeetsLanding() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <img src="assets/logo.png" alt="Beets" className="h-10" />
+              <img src="/logo.png" alt="Beets" className="h-10" />
             </div>
 
             {/* Desktop Navigation */}
