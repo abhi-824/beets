@@ -1,9 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowRight } from 'lucide-react';
 import AnimatedDots from "./components/AnimatedDots";
 
 export default function BeetsLanding() {
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+
   const [showVideoModal, setShowVideoModal] = useState(false);
   useEffect(() => {
     // Load Calendly CSS
@@ -130,30 +134,90 @@ export default function BeetsLanding() {
               <a href="#features" className="text-sm font-medium text-white hover:text-[#9A2838] transition-colors">
                 Features
               </a>
-              
+
               <a href="#blogs" className="text-sm font-medium text-white hover:text-[#9A2838] transition-colors">
                 Blogs
               </a>
               <a href="#waitlist" className="text-sm bg-[#7A1E2D] hover:bg-[#9A2838] text-white font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-[#7A1E2D]/20">
-              Join Waitlist
+                Join Waitlist
               </a>
             </div>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden p-2 text-white/70 hover:text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+            <div className="md:hidden flex items-center gap-3">
+
+              {/* ✅ Mobile Join Waitlist */}
+              <a
+                href="#waitlist"
+                className="text-xs bg-[#7A1E2D] hover:bg-[#9A2838] text-white font-semibold px-4 py-2 rounded-md transition-all"
+              >
+                Join Waitlist
+              </a>
+
+              {/* Hamburger */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="p-2 text-white/70 hover:text-white"
+                aria-label="Toggle menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{
+                duration: 0.25,
+                ease: "easeInOut",
+              }}
+              className="md:hidden overflow-hidden border-t border-white/10 bg-[#0B0A08]/95 backdrop-blur-md"
+            >
+              <motion.div
+                initial={{ y: -8 }}
+                animate={{ y: 0 }}
+                exit={{ y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="px-6 py-6 flex flex-col gap-4"
+              >
+                <a
+                  href="#features"
+                  className="text-sm font-medium text-white hover:text-[#9A2838]"
+                  onClick={() => setTimeout(() => setMobileOpen(false), 900)}
+                >
+                  Features
+                </a>
+
+                <a
+                  href="#blogs"
+                  className="text-sm font-medium text-white hover:text-[#9A2838]"
+                  onClick={() => setTimeout(() => setMobileOpen(false), 900)}
+                >
+                  Blogs
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </nav>
 
       {/* Hero */}
       <section className="pt-40 pb-32 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl md:text-4xl font-semibold leading-tight">
-          <span className="text-[#7A1E2D]">Beets</span>: Cursor‑style AI editing<br />for PowerPoint
+            <span className="text-[#7A1E2D]">Beets</span>: Cursor‑style AI editing<br />for PowerPoint
           </h1>
           <p className="mt-6 text-white/60 max-w-xl">
             Beets lives inside PowerPoint. Chat with your deck, review every suggested change, and accept or reject edits component‑by‑component.
@@ -175,21 +239,22 @@ export default function BeetsLanding() {
         </motion.div>
 
         {/* Animated visual - Replace with your GIF */}
-        <div className="relative h-[360px] flex items-center justify-center">
+        <div className="relative hidden md:flex h-[360px] flex items-center justify-center">
           {/* Option 1: Use your GIF (uncomment and add your GIF path) */}
           {/* <img src="assets/hero-animation.gif" alt="Animation" className="w-full h-full object-contain" /> */}
 
           {/* Option 2: Placeholder with animated dots */}
           <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-          <AnimatedDots />
+            <AnimatedDots />
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 flex justify-around">
-        <div className="flex justify-around w-full max-w-7xl text-sm">
-          <div className="flex flex-col items-center max-w-[220px]">
+      <section className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+        <div className="grid  text-center grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-12 w-full text-sm">
+
+          <div className="flex flex-col items-center text-center mx-auto max-w-[220px]">
 
             <svg className="w-6 h-6 mb-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -360,7 +425,7 @@ export default function BeetsLanding() {
                   <p className="text-sm text-white/60">Get notified first when Beets launches</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#7A1E2D]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg className="w-3.5 h-3.5 text-[#7A1E2D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -372,7 +437,7 @@ export default function BeetsLanding() {
                   <p className="text-sm text-white/60">Behind-the-scenes development insights</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#7A1E2D]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg className="w-3.5 h-3.5 text-[#7A1E2D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -462,19 +527,18 @@ export default function BeetsLanding() {
 
               {/* Banner */}
               {banner.show && (
-                <div 
-                  className={`p-4 rounded-lg border ${
-                    banner.type === 'success' 
-                      ? 'bg-green-500/10 border-green-500/30 text-green-400' 
-                      : 'bg-red-500/10 border-red-500/30 text-red-400'
-                  }`}
+                <div
+                  className={`p-4 rounded-lg border ${banner.type === 'success'
+                    ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                    : 'bg-red-500/10 border-red-500/30 text-red-400'
+                    }`}
                 >
                   {banner.message}
                 </div>
               )}
 
               {/* Submit Button */}
-              <button 
+              <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
                 className="w-full flex items-center justify-between px-6 py-4 bg-[#7A1E2D] hover:bg-[#8B2333] rounded-lg font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
