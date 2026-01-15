@@ -22,7 +22,7 @@ export default function DemoVideo({ onOpenVideoModal }: DemoVideoProps) {
             </div>
             {/* YouTube thumbnail - using the video ID from the modal */}
             <img 
-              src="https://img.youtube.com/vi/k3hnXg1Ap5g/maxresdefault.jpg" 
+              src="https://img.youtube.com/vi/nLI1lgSZS0s/maxresdefault.jpg" 
               alt="Demo video thumbnail" 
               className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity"
             />

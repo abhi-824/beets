@@ -32,7 +32,7 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
         {/* YouTube iframe */}
         <iframe
           className="w-full h-full"
-          src="https://www.youtube.com/embed/k3hnXg1Ap5g?autoplay=1"
+          src="https://www.youtube.com/embed/nLI1lgSZS0s?autoplay=1"
           title="Beets Demo"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
